@@ -16,32 +16,84 @@ package elMus;
     5) int      TipoPar
     6) boolean  Juego
 2.- Generamos aleatoriamente Número y Palo
-3.- Método averiguar Valor
-4.- Método para averiguar Par
-    Caso afirmativo: Averiguar Tipo
-5.- Método para averiguar Juego
+
+Y tedremos el número de la carta, su palo y el valor
 */
 public class Carta {
     
     //Atributos
     private int         num;
-    private String      Palo;
+    private String      palo;
+    private int         aleatorio;
     private int         valor;
-    private boolean     par;
-    private int         tipoPar;
-    private boolean     juego;
     
     /*====================================================================*/
     //Constructor
 
-    public Carta(int num, String Palo) {
+    public Carta(int num, String palo) {
         this.num = num;
-        this.Palo = Palo;
+        this.palo = palo;
         valor = calcValor();
     }
+
+    /***********************************************************************/
+    //Getter
     
+    public int getValor(){
+        return valor;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public String getPalo() {
+        return palo;
+    }
+
     /*====================================================================*/
     //Métodos
+    
+    /**********************************************************************/
+    //Generar aleatoriamente el Número y el Palo
+    public void generarCarta() {
+        num = aleatorioNum();
+        palo = aleatorioPalo();
+    } // Genere cartas (excluye 8 y 9)
+    
+    private int aleatorioNum(){
+        
+        do{
+           aleatorio = (int)(Math.random()*11+1); 
+        }while ( (aleatorio != 8) || (aleatorio != 9));
+        
+        return aleatorio;
+    }
+    
+    private String aleatorioPalo(){
+
+        String alePalo;
+
+        aleatorio = (int)(Math.random()*3);
+        
+        switch (aleatorio) {
+            case 0:
+                alePalo = "ORO";
+                break;
+            case 1:
+                alePalo = "ESPADAS";
+                break;
+            case 2:
+                alePalo = "COPAS";
+                break;
+            default:
+                alePalo = "BASTO";
+                break;
+        }
+        
+        return alePalo;
+    }
+    /**********************************************************************/
     
     //Averiguar valor
     private int calcValor(){
@@ -82,21 +134,5 @@ public class Carta {
         }
         
         return calc;
-    }
-    
-    //Si es par o no
-    private void par(){
-        //Comparar valores de cada carta
-    }
-    
-    //Caso afirmativo en par: descubrir tipo (Par, Medias o Duples)
-    private void tipoPar(){
-        
-    }
-    
-    //Si es juego o no
-    private void juego(){
-        //Sumar valores de cada carta
-        
     }
 }//Carta
