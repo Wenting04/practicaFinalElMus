@@ -75,7 +75,7 @@ public class Carta {
 
         String alePalo;
 
-        aleatorio = (int)(Math.random()*3*1);
+        aleatorio = (int)(Math.random()*3+1);
         
         switch (aleatorio) {
             case 1:
