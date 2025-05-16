@@ -44,17 +44,48 @@ public class Mano {
     private boolean     juego;
     private int         sumaJuego = 0;
     
+    private int         num;
+    private String      palo;
+    
     /*====================================================================*/
     //Constructor
     public Mano(String nombre) {
         this.nombre = nombre;
     }
     
+    /***********************************************************************/
+    //Getters
+
+    public boolean isPar() {
+        return par;
+    }
+
+    public String getTipoPar() {
+        return tipoPar;
+    }
+
+    public boolean isJuego() {
+        return juego;
+    }
+
+    public int getSumaJuego() {
+        return sumaJuego;
+    }
+
+    public int getNum(int i) {
+        num = carta[i].getNum();
+        return num;
+    }
+
+    public String getPalo(int i) {
+        palo = carta[i].getPalo();
+        return palo;
+    }
+
     /*====================================================================*/
     //Métodos
-    
-   //Generar carta sin repetir
-    public void generarMano(){
+    //Generar carta sin repetir
+    public void generarMano() {
         boolean repetir = false;
         
         //La primera, la de posición 0, no lo revisamos

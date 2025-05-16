@@ -8,6 +8,11 @@
 
 package elMus;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /*
 Pide para subir:
     -> 2 comprimidos
@@ -135,6 +140,10 @@ public class Principal {
         
         //Imprimir
         imprimir(jugador);
+        
+        //Crear fichero e imprimir todo en ella
+        imprimirFichero(jugador);
+        
     }//main
     
     /*====================================================================*/
@@ -150,6 +159,98 @@ public class Principal {
                 System.out.println("--------------------------------------------------------------------------------------------------");
         }
         System.out.println("***************************************************************************************************");
+    }
+    
+    private static void imprimirFichero(Mano jugador[]){
+        
+        //Para imprimirlo hay que obtener todos los datos para pasarlo al archivo
+            //No es posible llamar al método de otra clase
+        
+        int num[] = new int[4];
+        String palo[] = new String[4];
+        
+        boolean     par;
+        String      tipoPar;
+        boolean     juego;
+        int         sumaJuego = 0;
+        
+        FileWriter fichero = null;
+        
+        try{
+            //Crear fichero llamado elMus.txt
+            fichero = new FileWriter("c:/ficheros/elMus.txt");
+            PrintWriter salida = new PrintWriter(fichero);
+            
+            //Insertar contenido
+            salida.println("SALIDA:");
+            salida.println("***************************************************************************************************");
+            
+            for (int i = 0; i < jugador.length; i++) {
+                
+                /**************************************/
+                /*Obtener datos*/
+                for (int j = 0; j < 4; j++) {
+                    num[j] = jugador[i].getNum(j);
+                    palo[j] = jugador[i].getPalo(j);
+                }
+                
+                par = jugador[i].isPar();
+                tipoPar = jugador[i].getTipoPar();
+                juego = jugador[i].isJuego();
+                sumaJuego = jugador[i].getSumaJuego();
+                /**************************************/
+                
+                //Imprime jugador y num del jugador
+                salida.println("JUGADOR " + (i+1));
+                //Imprmir las 4 cartas
+                for (int j = 0; j < 4; j++) {
+                    if (num[j] == 10) {
+                        salida.print("[SOTA DE " + palo[j] + "] ");
+                    } else if (num[j] == 11) {
+                        salida.print("[CABALLO DE " + palo[j] + "] ");
+                    } else if (num[j] == 12) {
+                        salida.print("[REY DE " + palo[j] + "] ");
+                    } else {
+                        salida.print("[" + num[j] + " DE " + palo[j] + "] ");
+                    }
+                }
+                
+                salida.println("");
+                
+                if (par == true) {
+                    salida.println("PARES: SÍ " + tipoPar);
+                } else {
+                    salida.println("PARES: NO");
+                }
+
+                if (juego == true)
+                    salida.println("JUEGO: SÍ " + sumaJuego);
+                else
+                    salida.println("JUEGO: NO");
+                
+                
+                if (i < (jugador.length-1))
+                    salida.println("--------------------------------------------------------------------------------------------------");
+            }
+            
+            salida.println("***************************************************************************************************");
+        } catch (FileNotFoundException e){
+            
+            System.out.println(e.getMessage());
+            
+        } catch (IOException e){
+            
+            System.out.println("Error al escribir en: " + e.getMessage());
+            
+        } finally {
+            
+            try {
+                if (fichero != null)
+                    fichero.close();
+            } catch (IOException e) {
+                System.out.println("Error al cerrar : " + e.getMessage());
+            }
+        }
     }
     
 }//Principal
