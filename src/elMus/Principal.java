@@ -127,10 +127,23 @@ public class Principal {
         Mano jugador[] = new Mano[4];
         
         //Instanciar del 0 al 3, poniendo sólo nombre
+            //Y generar mano para cada uno
         for (int i = 0; i < jugador.length; i++) {
-            jugador[i] = new Mano ("Jugador"+i);
+            jugador[i] = new Mano ("JUGADOR "+i);
+            jugador[i].generarMano();
         }
         
         //Imprimir
+        imprimir(jugador);
     }//main
+    
+    /*====================================================================*/
+    //Imprimir
+    
+    private static void imprimir(Mano jugador[]){
+        for (Mano i: jugador) {
+            i.imprimirMano();
+        }
+    }
+    
 }//Principal

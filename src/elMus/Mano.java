@@ -64,6 +64,9 @@ public class Mano {
                 repetir = comprobar(i); //Desde donde estoy [i], voy comprobando de 1 en 1 desde los anteriores hasta el actual
             }while ( repetir == true );
         }
+        
+        par();
+        juego();
     }
     
     /***********************************************************************/
@@ -201,5 +204,36 @@ public class Mano {
     /***********************************************************************/
     
     //Imprimir
+    public void imprimirMano(){
+        System.out.println(nombre);
+        for (Carta i: carta) {
+            if ( i.getNum() == 10 ){
+                System.out.print("[SOTA DE " + i.getPalo() + "] ");
+            }else if ( i.getNum() == 11 ){
+                System.out.print("[CABALLO DE " + i.getPalo() + "] ");
+            }else if ( i.getNum() == 12 ){
+                System.out.print("[REY DE " + i.getPalo() + "] ");
+            }else{
+                System.out.print("[" + i.getNum() + " DE " + i.getPalo() + "] ");
+            }
+        }
+        
+        if (par == true)
+            System.out.println("PARES: SÍ " + tipoPar);
+        else
+            System.out.println("PARES: NO");
+        
+        if (juego == true)
+            System.out.println("JUEGO: SÍ " + sumaJuego);
+        else
+            System.out.println("JUEGO: NO");
+    }
+    
+    /*
+    JUGADOR 1
+    [1 de copas] [sota de espadas] [sota de oros] [caballo de espadas]
+    PARES : Sí pareja
+    JUEGO: Sí 31
+    */
     
 }//Mano
