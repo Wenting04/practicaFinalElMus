@@ -108,6 +108,29 @@ Práctica 1.- Documento PDF. Análisis del problema
 Práctica 2.- Codificación java de la solución
 */
 
+/* Principal, Mano y Carta
+1.- Tener Array de 4 posiciones --> JUGADORES
+
+Como en U6Ejer - Hoja1Ej2
+2.- Dentro de cada Array instanciamos 'Mano.java'
+    Solo tenemos que darle nombre
+
+3.- Llamar método para generar aleatoriamente cartas
+    Dentro de 'Mano.java' vamos a asignar las cartas aleatoriamente y descubrimos si par y juego o no
+
+4.- Imprimimos
+*/
 public class Principal {
-    
-}
+    public static void main(String[] args) {
+        
+        //Crear Array de 4 posiciones que guarden 4 manos
+        Mano jugador[] = new Mano[4];
+        
+        //Instanciar del 0 al 3, poniendo sólo nombre
+        for (int i = 0; i < jugador.length; i++) {
+            jugador[i] = new Mano ("Jugador"+i);
+        }
+        
+        //Imprimir
+    }//main
+}//Principal
