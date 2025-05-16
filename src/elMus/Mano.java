@@ -7,6 +7,9 @@
 /***********************************************************************/
 
 package elMus;
+
+import java.util.ArrayList;
+
 /*
 1.- Nos dan el nombre (atributo y constructor)
 2.- Tenemos un Array de 4 posiciones --> La MANO (4 cartas por jugador)
@@ -37,7 +40,7 @@ public class Mano {
     private Carta       carta[] = new Carta [4];
 
     private boolean     par;
-    private int         tipoPar;
+    private String      tipoPar;
     private boolean     juego;
     private int         sumaJuego = 0;
     
@@ -104,22 +107,79 @@ public class Mano {
     
     //Si es par y su tipo
     private void par(){
-        int cont = 0;
         
-        //Comparar valores de cada carta --> Get de Valor
-        for (int i = 1; i < carta.length; i++) {
-             //Miro si en la posición en el que estoy[i] y en el que compuebo[j] tiene valores iguales
-             for (int j = 0; j < i; j++) {
-                if (   carta[i].getValor() == carta[j].getValor()   )
-                    cont++;
+        int cont1 = 0, cont2 = 0;
+        int i = 0;
+        
+        //0 -> No repetido      1 -> Sí repetido
+        int contPar[] = {0, 0, 0, 0};
+        
+        do{
+            //Cuando es 1, se salta pq ya tiene pareja
+            if ( contPar[i] == 0){
+                //Miro si en la posición en el que estoy[i] y en el que compuebo[j] tiene valores iguales
+                for (int j = 0; j < i; j++) {
+
+                   if (   carta[carta.length-i].getValor() == carta[j].getValor()   ){
+                       contPar[carta.length-i] = 1;
+                       contPar[j] = 1;
+                   }
+                   
+                   //Marco con 1 las que sí son pareja para poder luego descartarlas
+                }
+                
+                for (int j: contPar) {
+                    cont1 = cont1 + j;
+                }
+                
+                if ((cont1 == 2) && (i == 0)){
+                    
+                    ArrayList<Integer> arrayCero = new ArrayList<Integer>();
+                    
+                    //En caso de que sólo haya 2 cartas iguales, buscamos qué posición del array es 0, y comparamos entre ellas
+                    for (int j = 0; j < contPar.length; j++) {
+                        if (contPar[j] == 0)
+                            arrayCero.add(j);
+                    }
+                    
+                    if (  carta[ arrayCero.get(0) ].getValor() == carta[ arrayCero.get(1) ].getValor()   ){
+                        contPar[arrayCero.get(0)] = 2;
+                        contPar[arrayCero.get(1)] = 2;
+                    }
+                    
+                    for (int j: contPar) {
+                        if ( j == 2 )
+                            cont2 = cont2 + (j-1);
+                    }
+                }
             }
-        }
+            
+            i++;
+            
+        }while(  (i < 3) || (cont1 == 4)  );
+        
+        if ( cont1 == 0 )
+            par = false;
+        else
+            par = false;
+        
+        tipoPar(cont1, cont2);
     }
     
     //Caso afirmativo en par: descubrir tipo (Par, Medias o Duples)
-    private void tipoPar(){
+    private void tipoPar(int cont1, int cont2){
         
-    }
+        if( cont1 == 4 )
+            tipoPar = "DUPLEX";         //4 cartas iguales
+        else if (cont1 == 3)
+            tipoPar = "MEDIA";          //3 cartas iguales
+        else if ( cont1 == 2 ){
+            if (cont2 == 2)
+                tipoPar = "DUPLEX";     //2 pares iguales
+            else
+                tipoPar = "PAR";        //2 cartas iguales
+            }
+        }
     
     //Si es juego y su suma
     private void juego(){
