@@ -58,9 +58,11 @@ public class Mano {
         boolean repetir = false;
         
         //La primera, la de posición 0, no lo revisamos
+        carta[0] = new Carta();
+        
         for (int i=1; i < carta.length; i++) {
             do{
-                carta[i].generarCarta();
+                carta[i] = new Carta();
                 repetir = comprobar(i); //Desde donde estoy [i], voy comprobando de 1 en 1 desde los anteriores hasta el actual
             }while ( repetir == true );
         }
@@ -159,12 +161,12 @@ public class Mano {
             
             i++;
             
-        }while(  (i < 3) || (cont1 == 4)  );
+        }while(i < 3);
         
         if ( cont1 == 0 )
             par = false;
         else
-            par = false;
+            par = true;
         
         tipoPar(cont1, cont2);
     }
@@ -174,15 +176,15 @@ public class Mano {
         
         if( cont1 == 4 )
             tipoPar = "DUPLEX";         //4 cartas iguales
-        else if (cont1 == 3)
+        if (cont1 == 3)
             tipoPar = "MEDIA";          //3 cartas iguales
-        else if ( cont1 == 2 ){
+        if ( cont1 == 2 ){
             if (cont2 == 2)
                 tipoPar = "DUPLEX";     //2 pares iguales
             else
                 tipoPar = "PAR";        //2 cartas iguales
-            }
         }
+    }
     
     //Si es juego y su suma
     private void juego(){
@@ -193,7 +195,7 @@ public class Mano {
         }
         
         //Es juego si [31, 40] (se incluye dichos números)
-        if ( (sumaJuego < 31) || (sumaJuego > 40) )
+        if ( (sumaJuego >= 31) && (sumaJuego <= 40) )
             juego = true;
         else
             juego = false;
@@ -218,6 +220,8 @@ public class Mano {
             }
         }
         
+        System.out.println("");
+        
         if (par == true)
             System.out.println("PARES: SÍ " + tipoPar);
         else
@@ -227,6 +231,7 @@ public class Mano {
             System.out.println("JUEGO: SÍ " + sumaJuego);
         else
             System.out.println("JUEGO: NO");
+        
     }
     
     /*

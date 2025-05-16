@@ -30,9 +30,8 @@ public class Carta {
     /*====================================================================*/
     //Constructor
 
-    public Carta(int num, String palo) {
-        this.num = num;
-        this.palo = palo;
+    public Carta() {
+        generarCarta();
         valor = calcValor();
     }
 
@@ -56,34 +55,36 @@ public class Carta {
     
     /**********************************************************************/
     //Generar aleatoriamente el Número y el Palo
+    
     public void generarCarta() {
         num = aleatorioNum();
         palo = aleatorioPalo();
     } // Genere cartas (excluye 8 y 9)
     
-    private int aleatorioNum(){
+    
+    public int aleatorioNum(){
         
         do{
            aleatorio = (int)(Math.random()*11+1); 
-        }while ( (aleatorio != 8) || (aleatorio != 9));
+        }while ( (aleatorio == 8) || (aleatorio == 9));
         
         return aleatorio;
     }
     
-    private String aleatorioPalo(){
+    public String aleatorioPalo(){
 
         String alePalo;
 
-        aleatorio = (int)(Math.random()*3);
+        aleatorio = (int)(Math.random()*3*1);
         
         switch (aleatorio) {
-            case 0:
+            case 1:
                 alePalo = "ORO";
                 break;
-            case 1:
+            case 2:
                 alePalo = "ESPADAS";
                 break;
-            case 2:
+            case 3:
                 alePalo = "COPAS";
                 break;
             default:

@@ -129,7 +129,7 @@ public class Principal {
         //Instanciar del 0 al 3, poniendo sólo nombre
             //Y generar mano para cada uno
         for (int i = 0; i < jugador.length; i++) {
-            jugador[i] = new Mano ("JUGADOR "+i);
+            jugador[i] = new Mano ("JUGADOR "+(i+1));
             jugador[i].generarMano();
         }
         
@@ -141,9 +141,15 @@ public class Principal {
     //Imprimir
     
     private static void imprimir(Mano jugador[]){
-        for (Mano i: jugador) {
-            i.imprimirMano();
+        System.out.println("SALIDA:");
+        System.out.println("***************************************************************************************************");
+        
+        for (int i = 0; i < jugador.length; i++) {
+            jugador[i].imprimirMano();
+            if (i < (jugador.length-1))
+                System.out.println("--------------------------------------------------------------------------------------------------");
         }
+        System.out.println("***************************************************************************************************");
     }
     
 }//Principal
